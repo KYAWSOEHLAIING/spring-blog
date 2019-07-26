@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Past;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -16,9 +18,12 @@ public class Author implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty(message = "{author.name.validator.msg}")
     private String name;
+    @Past(message = "Date of Birth must be Past")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
+    @NotEmpty(message = "Please enter something")
     private String interested;
     @Enumerated(EnumType.STRING)
     private Gender gender;
