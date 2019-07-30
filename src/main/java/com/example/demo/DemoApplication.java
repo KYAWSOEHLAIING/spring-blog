@@ -5,6 +5,7 @@ import com.example.demo.model.Gender;
 import com.example.demo.model.Post;
 import com.example.demo.repository.AuthorRepository;
 import com.example.demo.repository.PostRepository;
+import org.ocpsoft.prettytime.PrettyTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -23,6 +24,10 @@ public class DemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
         System.out.println("Hello Git");
+    }
+    @Bean
+    public PrettyTime prettyTime(){
+        return new PrettyTime();
     }
     @Bean @Profile("dev")
     public CommandLineRunner runner(AuthorRepository authorRepository, PostRepository postRepository){

@@ -1,13 +1,17 @@
 package com.example.demo.model;
 
+import com.example.demo.service.BeanUtil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
@@ -30,4 +34,20 @@ public class Post implements Serializable {
         this.body = body;
         this.lastUpdated = lastUpdated;
     }
+    public String showPrettyTime(){
+        PrettyTime prettyTime = BeanUtil.prettyTime(PrettyTime.class);
+        String pretty = "";
+        try {
+            pretty = prettyTime.format(convertToDate(lastUpdated));
+        } catch (Exception e) {
+
+        }
+        return pretty;
+    }
+
+    public Date convertToDate(LocalDate localDate) throws  Exception{
+        return new SimpleDateFormat("yyyy-MM-dd").parse(localDate.toString());
+
+    }
+
 }
