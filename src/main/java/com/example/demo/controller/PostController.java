@@ -20,6 +20,7 @@ public class PostController {
 
     @Autowired
     private AuthorService authorService;
+    private long updateId;
 
     @GetMapping("/post")
     public String create(Model model){
@@ -44,5 +45,20 @@ public class PostController {
     public String showDetails(Model model, @PathVariable("id") long id){
         model.addAttribute("post",postService.findById(id));
         return "postDetails";
+    }
+    @GetMapping("/posts/update/{id}")
+    public String updatePost(Model model,@PathVariable("id") long id){
+
+        this.updateId = id;
+        model.addAttribute("post",postService.findById(id));
+        model.addAttribute("authors",authorService.findAll());
+        return "postUpdateForm";
+
+    }
+
+    @PostMapping("/posts/update")
+    public String processPost(Post post){
+        postService.update(updateId,post);
+        return "redirect:/posts";
     }
  }

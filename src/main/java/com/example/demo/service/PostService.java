@@ -8,4 +8,5 @@ public interface PostService {
     Post create(Post post);
     Post findById(Long id);
     List<Post> findAll();
+    void update(long id,Post postUpdate);
 }

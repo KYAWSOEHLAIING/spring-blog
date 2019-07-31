@@ -16,6 +16,7 @@
                     <th>Last Updated</th>
                     <th>Author</th>
                     <th>Details</th>
+                    <th>Update</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -25,6 +26,7 @@
                     <td th:text="${pos.lastUpdated+' '+ pos.showPrettyTime()}"></td>
                     <td th:text="${pos.author.name}"></td>
                     <td><a href="#" th:href="@{'/posts/details/'+${pos.id}}" class="btn btn-primary">Details</a></td>
+                    <td><a href="#" th:href="@{'/posts/update/'+${pos.id}}" class="btn btn-primary">Update</a></td>
                 </tr>
                 </tbody>
             </table>
