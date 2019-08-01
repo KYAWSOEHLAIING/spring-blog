@@ -10,12 +10,15 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 
 @Configuration
@@ -58,8 +61,17 @@ public class WebConfig implements WebMvcConfigurer {
 
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<String> handleException(EntityNotFoundException ex){
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.OK);
+    public ModelAndView handleException(EntityNotFoundException ex, HttpServletRequest httprequest){
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("message",ex.getMessage());
+        mv.addObject("exception",ex);
+        mv.addObject("url",httprequest.getRequestURL());
+        mv.setViewName("pageNotFound");
+        return mv;
     }
 
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addRedirectViewController("/","/posts");
+    }
 }
