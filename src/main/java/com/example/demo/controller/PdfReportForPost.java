@@ -16,9 +16,9 @@ public class PdfReportForPost {
         Document doc = new Document();
 
         try{
-            PdfPTable table = new PdfPTable(4);
+            PdfPTable table = new PdfPTable(5);
             table.setWidthPercentage(80);
-            table.setWidths(new int[]{1,3,3,3});
+            table.setWidths(new int[]{1,3,10,5,5});
 
 
             PdfPCell hcell;
@@ -33,9 +33,9 @@ public class PdfReportForPost {
             table.addCell(hcell);
 
 
-//            hcell=new PdfPCell(new Phrase("Body",font));
-//            hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-//            table.addCell(hcell);
+            hcell=new PdfPCell(new Phrase("Body",font));
+            hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(hcell);
 
             hcell=new PdfPCell(new Phrase("LastUpdate",font));
             hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -61,11 +61,11 @@ public class PdfReportForPost {
                 table.addCell(cell);
 
 
-//                cell=new PdfPCell(new Phrase(post.getBody().toString()));
-//                cell.setPaddingLeft(5);
-//                cell.setVerticalAlignment(Element.ALIGN_TOP);
-//                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-//                table.addCell(cell);
+                cell=new PdfPCell(new Phrase(post.getBody().toString()));
+                cell.setPaddingLeft(5);
+                cell.setVerticalAlignment(Element.ALIGN_TOP);
+                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                table.addCell(cell);
 
 
                 cell=new PdfPCell(new Phrase(post.getLastUpdated().toString()));

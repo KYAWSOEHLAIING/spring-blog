@@ -79,11 +79,11 @@ public class PostController {
         postService.delete(id);
         return "redirect:/posts";
     }
-    @GetMapping(value="/pdfreportforpost",produces = MediaType.APPLICATION_PDF_VALUE)
+    @GetMapping(value="posts/pdf",produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> generatePdfReport(){
         ByteArrayInputStream bis=PdfReportForPost.postPdfView(postService.findAll());
         HttpHeaders headers=new HttpHeaders();
-        headers.add("Content-Disposition","inline;filename=employeesreport.pdf");
+        headers.add("Content-Disposition","inline;filename=postsreport.pdf");
 
         return ResponseEntity.ok()
                 .headers(headers)

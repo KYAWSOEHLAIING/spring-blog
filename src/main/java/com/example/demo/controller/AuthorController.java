@@ -43,11 +43,11 @@ public class AuthorController {
         model.addAttribute("success",model.containsAttribute("success"));
         return "authors";
     }
-    @GetMapping(value="/pdfreport",produces = MediaType.APPLICATION_PDF_VALUE)
+    @GetMapping(value="authors/pdf",produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> generatePdfReport(){
         ByteArrayInputStream bis=PdfReport.authorPdfView(authorService.findAll());
         HttpHeaders headers=new HttpHeaders();
-        headers.add("Content-Disposition","inline;filename=employeesreport.pdf");
+        headers.add("Content-Disposition","inline;filename=authorsreport.pdf");
 
         return ResponseEntity.ok()
                 .headers(headers)
